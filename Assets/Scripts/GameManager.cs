@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public float scoreMultiply;
     public PlayerController pc;
 
-    private float score;
+    public float score;
     
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         }else
         {
             score += scoreMultiply * Time.deltaTime;
-            scoreText.text = "Score : " + Mathf.RoundToInt(score) + " Meters";
+            scoreText.text = "Score : " + Mathf.RoundToInt(score);
         }
         
     }

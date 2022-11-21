@@ -1,85 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-	public float jumpForce;
-	public int doubleJump;
-	private Rigidbody rb;
+    private Rigidbody playerRb;
+    public float jumpForce;
+    public float gravityModifier;
+    public bool isOnGround = true;
+    public int doubleJump;
+    public bool gameOverStatus = false;
+    public GameObject gameOverPanel;
 
-	public GameObject gameOver;
-	
-	private int jumpTemp;
-	private AudioSource audioJump;
-	private Animator playerAnim;
-	public bool gameOverStatus = false;
+    private AudioSource audioJump;
+    private Animator playerAnim;
+    private int jumpTemp;
+    public GameManager gameScore;
 
-	// private bool isOnGround =false;
-
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-		playerAnim = GetComponent<Animator>();
-		rb = GetComponent<Rigidbody>();
-		audioJump = GetComponent<AudioSource>();
-		jumpTemp = doubleJump;
-		gameOver.SetActive(false);
-		Time.timeScale = 1;
-		
-
-	}
+        Time.timeScale = 1;
+        audioJump = GetComponent<AudioSource>();
+        playerRb = GetComponent<Rigidbody>();
+        Physics.gravity *= gravityModifier;
+        jumpTemp = doubleJump;
+        playerAnim = GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && jumpTemp > 0)
-		{
-			rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-			audioJump.Play();
-			// isOnGround = false;
-			jumpTemp -= 1;
+        if (Input.GetMouseButtonDown(0) && jumpTemp > 0)
+        {
+            
+            playerRb.velocity = new Vector3(playerRb.velocity.y, jumpForce);
+            audioJump.Play();
+            isOnGround = false;
+            
+            playerAnim.SetTrigger("Jump");
+            jumpTemp -= 1;
+        }
+        
 
-		}
-
-		if(Input.GetKeyDown(KeyCode.Escape))
-		{
-			RestartGame();
-		}
-		
-		if(transform.position.y < -5)
-		{
-			Time.timeScale = 0;
-			gameOverStatus = true;
-			gameOver.SetActive(true);
-		}
+        if (transform.position.x < -5 || transform.position.y < -5)
+        {
+            Time.timeScale = 0;
+            gameOverStatus = true;
+            gameOverPanel.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
-	
-	private void OnCollisionEnter(Collision other)
-	{
-		if(other.gameObject.CompareTag("Ground"))
-		{
-			// isOnGround = true;
-			jumpTemp = doubleJump;
-		}
-		if (other.gameObject.CompareTag("Obstacle"))
-		{
-			gameOver.SetActive(true);
-			gameOverStatus = true;
-			playerAnim.SetBool("isDie", true);
-			Invoke("StopAnim", 1f);
 
-
-		}
-	}
-	public void StopAnim()
+    
+    public void StopAnim()
     {
-		Time.timeScale = 0;
-	}
-
-	public void RestartGame()
+        Time.timeScale = 0;
+    }
+    private void OnCollisionEnter(Collision collision)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+       
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            // isOnGround = true;
+            playerAnim.SetBool("isRunning", true);
+            jumpTemp = doubleJump;
+            isOnGround = true;
+        }
+        else
+        {
+            playerAnim.SetBool("isRunning", false);
+        }
+
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            gameOverPanel.SetActive(true);
+            gameOverStatus = true;
+            playerRb.constraints = RigidbodyConstraints.FreezeAll;
+            playerAnim.SetBool("isDie", true);
+            Invoke("StopAnim", 1f);
+        }
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            Debug.Log("collision with coin");
+            Destroy(collision.gameObject);
+            gameScore.score += 2;
+            
+
+        }
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        
     }
 }
