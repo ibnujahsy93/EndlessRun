@@ -11,7 +11,7 @@ public class MovingUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TitleGame.DOScale(new Vector3(9f, 1.75f, 1f), 2).SetLoops(-1, LoopType.Yoyo);
+        TitleGame.DOScale(new Vector3(10f, 2f, 1f), 2).SetLoops(-1, LoopType.Yoyo);
         playButton.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 2).SetLoops(-1, LoopType.Yoyo);
         
     }
