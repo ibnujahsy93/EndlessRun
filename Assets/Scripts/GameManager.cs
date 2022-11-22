@@ -6,6 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreTextGameOver;
     public float scoreMultiply;
     public PlayerController pc;
 
@@ -23,10 +24,12 @@ public class GameManager : MonoBehaviour
         if(pc.gameOverStatus)
         {
 
+
         }else
         {
             score += scoreMultiply * Time.deltaTime;
             scoreText.text = "Score : " + Mathf.RoundToInt(score);
+            scoreTextGameOver.text = "Score : " + Mathf.RoundToInt(score);
         }
         
     }
