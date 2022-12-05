@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     private int jumpTemp;
     public GameManager gameScore;
 
-    // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
@@ -28,9 +27,10 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
+        //Jump Control and Jump Animation
         if (Input.GetMouseButtonDown(0) && jumpTemp > 0)
         {
             
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
             jumpTemp -= 1;
         }
         
-
+        //Check if Player fall off
         if (transform.position.x < -5 || transform.position.y < -5)
         {
             Time.timeScale = 0;
@@ -55,11 +55,12 @@ public class PlayerController : MonoBehaviour
     
     public void StopAnim()
     {
+        //Stoping Time and Animation
         Time.timeScale = 0;
     }
     private void OnCollisionEnter(Collision collision)
     {
-       
+        //Checking If player hits ground and Run Animation
         if (collision.gameObject.CompareTag("Ground"))
         {
             // isOnGround = true;
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("isRunning", false);
         }
 
+        //Checking if player hits Obstacle, control player death and animation death
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             gameOverPanel.SetActive(true);
@@ -80,18 +82,14 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("isDie", true);
             Invoke("StopAnim", 1f);
         }
+
+        //Check if player hits C
         if (collision.gameObject.CompareTag("Coin"))
         {
             Debug.Log("collision with coin");
             Destroy(collision.gameObject);
             gameScore.score += 2;
-            
-
         }
 
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        
     }
 }

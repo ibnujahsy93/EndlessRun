@@ -8,11 +8,6 @@ public class SpawnManager : MonoBehaviour
 	public GameObject obstaclePrefab;
 	public GameObject obstacle2Prefab;
 	public GameObject coinPrefab;
-
-
-
-	// public Vector3 spawnPos = new Vector3(15,0.25f, 0);
-
 	private bool isSpawn = false;
 	// Start is called before the first frame update
 	void Start()
@@ -23,6 +18,7 @@ public class SpawnManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		//Check if its not Spawn
 		if (!isSpawn)
 		{
 			SpawnObstacle();
@@ -33,10 +29,13 @@ public class SpawnManager : MonoBehaviour
 
 	void SpawnObstacle()
 	{
-		// random pos
+		// Random Position
 		Vector3 spawnPos = new Vector3(20, Mathf.RoundToInt(Random.Range(7, 12)), -8);
-		// spawn
+		
+		//Spawning Ground
 		GameObject ground = Instantiate(groundPrefab, spawnPos, groundPrefab.transform.rotation);
+		
+		//Creating Randomizer and Spawning for Obstacle
 		int angkaProb = Random.Range(0, 3);
 		int angkaProb2 = Random.Range(0, 5);
 		if (angkaProb == 1)
@@ -53,12 +52,13 @@ public class SpawnManager : MonoBehaviour
 		}
 
 
-		// random scale
+		//Creating Random Scale
 		ground.transform.localScale = new Vector3(Mathf.RoundToInt(Random.Range(2, 5)), 1, 1);
 	}
 
 	IEnumerator SpawnDelay()
 	{
+		//Spawning Delay for every object
 		float spawnInterval = Random.Range(1.0f, 2f);
 		yield return new WaitForSeconds(spawnInterval);
 		isSpawn = false;

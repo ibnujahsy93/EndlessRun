@@ -10,37 +10,42 @@ public class MenuController : MonoBehaviour
 
     public void PlayGame()
     {
+        //Load GameScene
         UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
         Time.timeScale = 1;
     }
     public void MenuScene()
     {
+        //Load MenuScene
         UnityEngine.SceneManagement.SceneManager.LoadScene("MenuScene");
     }
     public void ExitGame()
     {
+        //Exit Game
         Application.Quit();
     }
 
     public void SoundOff()
     {
+        //Disable Sound
         soundOn.SetActive(false);
         soundOff.SetActive(true);
-        // lagu mati
     }
 
     public void SoundOn()
     {
+        //Enable Sound
         soundOn.SetActive(true);
         soundOff.SetActive(false);
-        // lagu nyala
     }
     public void StopAnim()
     {
+        //Stop Time and Animation
         Time.timeScale = 0;
     }
     public void PlayAnim()
     {
+        //Play Time and Animation
         Time.timeScale = 1;
     }
 }

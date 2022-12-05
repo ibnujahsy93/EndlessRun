@@ -17,6 +17,7 @@ public class ObjectMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Moving All Object except Player to move left
         if (playerControllerScript.gameOverStatus == false)
         {
             if (gameObject.tag == "Obstacle")
