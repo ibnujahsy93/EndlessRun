@@ -28,6 +28,7 @@ public class MenuController : MonoBehaviour
     public void SoundOff()
     {
         //Disable Sound
+        AudioListener.pause = true;
         soundOn.SetActive(false);
         soundOff.SetActive(true);
     }
@@ -35,6 +36,7 @@ public class MenuController : MonoBehaviour
     public void SoundOn()
     {
         //Enable Sound
+        AudioListener.pause = false;
         soundOn.SetActive(true);
         soundOff.SetActive(false);
     }
