@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundConfiguration : MonoBehaviour
 {
-    public static SoundConfiguration instance;
+    public static SoundConfiguration instance; //menyimpan objek
  
     //void awake dijalankan ketika scene dimuat
     void Awake()

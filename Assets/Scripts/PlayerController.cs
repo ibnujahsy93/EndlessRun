@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody playerRb;
-    public float jumpForce;
-    public float gravityModifier;
-    public bool isOnGround = true;
-    public int doubleJump;
-    public bool gameOverStatus = false;
-    public GameObject gameOverPanel;
+    private Rigidbody playerRb; //mengambil rigidbody player
+    public float jumpForce; //menyimpan tinggi rendahnya lompatan player
+    public float gravityModifier; //mengatur gravitasi agar lompatan seperti berada diluar angkasa
+    public bool isOnGround = true; //menyimpan informasi player menginjak platform
+    public int doubleJump; //mengatur lompatan ganda
+    public bool gameOverStatus = false; // menyimpan status game over
+    public GameObject gameOverPanel; //mengambil objek 
 
-    private AudioSource audioJump;
-    private Animator playerAnim;
-    private int jumpTemp;
-    public GameManager gameScore;
+    private AudioSource audioJump; //mengambil audio
+    private Animator playerAnim; //mengambil animator
+    private int jumpTemp; //menyimpan jumlah lompatan yg telah dilakukan
+    public GameManager gameScore; //mengambil game manager
 
     void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1; //mengatur jalannya permainan
         audioJump = GetComponent<AudioSource>();
         playerRb = GetComponent<Rigidbody>();
-        Physics.gravity *= gravityModifier;
-        jumpTemp = doubleJump;
+        Physics.gravity *= gravityModifier; //mengatur agar lompatan melambat saat diudara
+        jumpTemp = doubleJump; 
         playerAnim = GetComponent<Animator>();
     }
 
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("collision with coin");
             Destroy(collision.gameObject);
-            gameScore.score += 2;
+            gameScore.score += 2; //menambahkan scoree = score + 2
         }
 
     }

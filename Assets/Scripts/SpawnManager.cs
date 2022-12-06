@@ -9,12 +9,7 @@ public class SpawnManager : MonoBehaviour
 	public GameObject obstacle2Prefab;
 	public GameObject coinPrefab;
 	private bool isSpawn = false;
-	// Start is called before the first frame update
-	void Start()
-	{
-
-	}
-
+	
 	// Update is called once per frame
 	void Update()
 	{
@@ -23,7 +18,7 @@ public class SpawnManager : MonoBehaviour
 		{
 			SpawnObstacle();
 			isSpawn = true;
-			StartCoroutine("SpawnDelay");
+			StartCoroutine("SpawnDelay"); //mengatur delay dari spawn rintangan
 		}
 	}
 
@@ -36,8 +31,8 @@ public class SpawnManager : MonoBehaviour
 		GameObject ground = Instantiate(groundPrefab, spawnPos, groundPrefab.transform.rotation);
 		
 		//Creating Randomizer and Spawning for Obstacle
-		int angkaProb = Random.Range(0, 3);
-		int angkaProb2 = Random.Range(0, 5);
+		int angkaProb = Random.Range(0, 3); //mengatur model obstacle 1
+		int angkaProb2 = Random.Range(0, 5); //mengatur model obstacle 2
 		if (angkaProb == 1)
         {
 			GameObject obstacle = Instantiate(obstaclePrefab, new Vector3(20 + Random.Range(1, 2), spawnPos.y + 0.3f, -8), obstaclePrefab.transform.rotation);

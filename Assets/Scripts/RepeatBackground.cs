@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RepeatBackground : MonoBehaviour
 {
-    private Vector3 startPos;
-    private float repeatWidth;
+    private Vector3 startPos; //menyimpan posisi awal background
+    private float repeatWidth; //menyimpan lebar yang akan diulang dari background
 
     void Start()
     {
