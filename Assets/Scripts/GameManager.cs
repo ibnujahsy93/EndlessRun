@@ -5,17 +5,17 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI scoreTextGameOver;
-    public float scoreMultiply;
+    public TextMeshProUGUI scoreText; // variable untuk menyimpan nilai skor
+    public TextMeshProUGUI scoreTextGameOver; // variable untuk menyimpan text game over
+    public float scoreMultiply; // variabel sebagai pengkali dari skor
     public PlayerController pc;
 
-    public float score;
+    public float score; // variabel skor itu sendiri
     
     // Start is called before the first frame update
     void Start()
     {
-        score = 0.0f;
+        score = 0.0f; // awal permainan skor 0
     }
 
     // Update is called once per frame
@@ -27,9 +27,9 @@ public class GameManager : MonoBehaviour
 
         }else
         {
-            score += scoreMultiply * Time.deltaTime;
-            scoreText.text = "Score : " + Mathf.RoundToInt(score);
-            scoreTextGameOver.text = "Score : " + Mathf.RoundToInt(score);
+            score += scoreMultiply * Time.deltaTime; // nilai skor dihitung berdasarkan durasi permainan
+            scoreText.text = "Score : " + Mathf.RoundToInt(score);	// menampilkan text skor
+            scoreTextGameOver.text = "Score : " + Mathf.RoundToInt(score);	// menampilkan skor akhir saat game over
         }
         
     }
