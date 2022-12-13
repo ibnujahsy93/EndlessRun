@@ -18,6 +18,7 @@ public class MenuController : MonoBehaviour
     {
         //Load MenuScene
         UnityEngine.SceneManagement.SceneManager.LoadScene("MenuScene");
+        Time.timeScale = 1;
     }
     public void ExitGame()
     {

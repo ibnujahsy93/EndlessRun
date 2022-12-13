@@ -45,10 +45,10 @@ public class PlayerController : MonoBehaviour
         //Check if Player fall off
         if (transform.position.x < -5 || transform.position.y < -5)
         {
-            Time.timeScale = 0;
             gameOverStatus = true;
             gameOverPanel.SetActive(true);
-            Time.timeScale = 0;
+            Invoke("StopAnim", 1f);
+
         }
     }
 
